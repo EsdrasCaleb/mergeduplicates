@@ -25,14 +25,14 @@ admin_externalpage_setup('tool_mergeduplicates_merge');
 $do = optional_param('do', null, PARAM_INT);
 
 $duplicatesusers = $DB->get_records_sql("SELECT username from 
-(SELECT username,count(id) as total from {user} group by username) as con where total>1");
+(SELECT username,count(id) as total from {user} where suspended=0 group by username) as con where total>1");
 $mut = new MergeUserTool();
 $logsid = array();
 $renderer = $PAGE->get_renderer('tool_mergeduplicates');
 echo $renderer->localheader();
 if($do){
     foreach($duplicatesusers as $dup){
-        $users = $DB->get_records_sql("SELECT * from {user} where username = '{$dup->username}' order by id");
+        $users = $DB->get_records_sql("SELECT * from {user} where username = '{$dup->username}' and suspended=0 order by id");
         $primeiro = true;
         $userTomerge;
         foreach($users as $user){
