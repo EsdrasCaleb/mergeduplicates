@@ -1,6 +1,8 @@
 # mergeduplicates
 a simple plugin to merge duplicate user(same username) in moodle
 
+It must be instaled in admin/tools
+
 This plugin depends on the merge user account plugin.
 
 Its a simple script that search for duplicate usernames and merge them. 
